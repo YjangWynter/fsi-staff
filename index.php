@@ -10,7 +10,9 @@
 </head>
 
 <body>
-    <div class="container-fluid row justify-content-sm-center ">
+   
+    <div class="container-fluid">
+        <div class="row justify-content-md-center">
 <?php
 session_start();
 ////////////////////////////////////////////////////
@@ -65,7 +67,7 @@ if (!$conn) {
 
              if (($count +1) % 3 ==0){ //Prints the new row and a card for every four entries
                //Closes the previous row ?> </div>
-                <div class="row col-sm-12  mx-auto my-auto">
+                <div class="row col-sm-12 justify-content-md-center  mx-auto my-auto">
                     <div class="card h-100 col-sm-3 my-2 px-0 mx-2 px-0 ">
                         <div class=" card-header py-0 px-0">
                         <!-- Not sure how to implement this
@@ -104,7 +106,7 @@ if (!$conn) {
             } else{  // prints the cards in the row 
                 //Prints the first row
                 //if the four or more entries exist, end the last row and create new row
-                ?><div class="card h-100 col-sm-3 my-2 px-0 mx-2 px-0 ">
+                ?><div class="card h-100  col-sm-3 my-2 px-0 mx-2 px-0 ">
 
                 <div class=" card-header py-0 px-0">
                 <a href="./staff.php?id=<?php  echo $id; ?>"> <img class="img-fluid card-img-top"src="<?php echo $image; ?>" width="50%"></a>
@@ -150,7 +152,7 @@ if (!$conn) {
 
 
      
-        
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
