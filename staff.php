@@ -39,7 +39,7 @@ if (!$conn) {
     die('No pudo conectarse: ' . $conn->error($e)); // Failed to Connect
     }
     //this selects Anna's information
-    $sql = "SELECT FULL_NAME, POSITION, DEPARTMENT, PRIMARY_MAIL, PHONE_EXT, BIOGRAPHY, RESEARCH_AREAS, RESEARCH_DESCRIPTION, PROJECTS, MENTORING, PUBLICATIONS, ORCID_LINK FROM $table WHERE FULL_NAME = 'Anne Katariina Virkki'";
+    $sql = "SELECT ID, FULL_NAME, POSITION, IMAGE, DEPARTMENT, PRIMARY_MAIL, PHONE_EXT, BIOGRAPHY, RESEARCH_AREAS, RESEARCH_DESCRIPTION, PROJECTS, MENTORING, PUBLICATIONS, ORCID_LINK FROM $table WHERE ID =".$_GET['id'];
     $result =  $conn->query($sql);
     if(!$result > 0){
       echo "Error #". $conn->errno . " \n";
@@ -47,17 +47,19 @@ if (!$conn) {
     } else{
     while($row = $result->fetch_assoc()){
         $name = $row['FULL_NAME'];
+        $image = $row['IMAGE'];
         $pos = $row['POSITION'];
         $dept = $row['DEPARTMENT'];
         $mail = $row['PRIMARY_MAIL'];
         $phone = $row['PHONE_EXT'];
+        $link = $row['ORCID_LINK'];
+
         $bio = explode('\n\n',$row["BIOGRAPHY"]);
         $areas =explode(',', $row["RESEARCH_AREAS"]);
         $description = $row['RESEARCH_DESCRIPTION'];
         $projects = $row['PROJECTS'];
         $mentor = $row['MENTORING'];
         $pubs = explode("\r\n",$row['PUBLICATIONS']);
-        $link = $row['ORCID_LINK'];
         }
     }
 ?>
@@ -66,10 +68,10 @@ if (!$conn) {
 
     <section class="row col-sm-12 ">
             <div class="col-sm-1 mx-4"></div>
-            <div class=" col-sm-3 card my-2 px-0 ml-4 ">
+            <div class=" col-sm-3 card h-100 my-2 px-0 ml-4 ">
 
                 <div class=" card-header py-0 px-0">
-                    <a href="./staff.php"><img class="img-fluid card-img-top"src="./img/femaile_profile.png" width="50%"></a>
+                    <a href="./staff.php"><img class="img-fluid card-img-top"src="<?php echo $image ?>" width="50%"></a>
                 </div>
                 <div class="card-body bg-dark text-light">
                     <p class="card-title m-0 p-0 text-center"> <?php echo $name; ?> </p>
@@ -89,15 +91,32 @@ if (!$conn) {
                         <li class="text-sm-left mx-3 row">
                         <span><i class="fas fa-phone-alt mx-4"></i></span>Ext:    <?php echo $phone; ?>
                         </li>
+                        <li class="text-sm-left mx-3 row">
+                            <span><a class="text-light" href=" <?php if (strlen($link) >0){ echo $link; }else {echo '#';} ?>"> <i class="fas fa fa-link mx-4"></i></a></span>    <a class="text-light"href=" <?php if (strlen($link) >0){echo $link; }else {echo '#';}?>"><?php  if (strlen($link) >0){ echo "Link";}else{ echo "N/A";}?></a>
+                        </li> 
+
                     </ul>
                 </div>
             </div>
             <div class="col-sm-4 p-0 mr-0 ml-5 my-3 justify-content-center">
                 <div class="research-interests">
-                    <div class="bg-dark text-light p-3 mt-5 mb-3 text-center">
-                        <h5 class="upper">Research Areas</h5>
-                    </div><?php //While loop for the interests ?>
 
+
+                    <div class=" bg-dark text-light p-3 mx-4 mb-2 mt-5 text-center">
+                            <h5 class="upper">Biography</h5><?php //if statement for bio ?>
+                        </div>
+                        <?php 
+                            for ($i = 0; $i < sizeof($bio); $i++){
+                               echo"<p class=' my-4 py-4 px-4'>".$bio[$i]."</p>";
+                            }
+                        ?>
+                
+
+                   
+
+                <div class="bg-dark text-light p-3 mt-5 mb-3 text-center">
+                        <h5 class="upper">Research Areas</h5>
+                    </div>
                     <ul class="text-black bg-white p-2 m-0 list-group list-group flush">
                     <?php 
                         for($i = 0; $i < sizeof($areas); $i++){
@@ -108,41 +127,13 @@ if (!$conn) {
                     ?>
 
                     </ul>
-                
-            <?php    if(strlen($link) > 5){   ?>
-                        <div class="orcid-link">
-                            <div class="bg-dark text-light p-3 mt-5 mb-3 mx-1 text-center">
-                                <h5 class="upper">Orcid Link</h5>
-                            </div>
-                            <?php 
-                        echo "<a href='".$link."'><li class='p-3 text-center mx-1 list-group-item'>Click here</li></a></div>";
-            }?>
-
-                   
-
-                    </div> 
-                        
+                </div>
                 </div>        
             <div class="col-sm-1 mx-5"></div>
         </section>
 
 
-        <section class="row col-sm-12">
 
-            <div class="col-sm-1"></div>
-            <div class="col-sm-10 ">
-                        <div class=" bg-dark text-light p-3 mx-4 mb-2 mt-5 text-center">
-                            <h5 class="upper">Biography</h5><?php //if statement for bio ?>
-                        </div>
-                        <?php 
-                            for ($i = 0; $i < sizeof($bio); $i++){
-                               echo"<p class=' my-4 py-4 px-5'>".$bio[$i]."</p>";
-                            }
-                        ?>
-                    </div>
-            <div class="col-sm-1"></div>
-
-        </section>
 
 
             <section class="px-4 row col-sm-12">
