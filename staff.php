@@ -173,14 +173,14 @@ if (!$conn) {
                         if(strlen($description)> 1){
                             echo $description;
                         }else{
-                                echo "No research description available";}
+                                echo "<h4 class='py-1'>Research description not available</h4>";}
                                 ?></p>
                     </div>
                     <div id="tab-2" role="tabpanel" class="tab-pane my-4 p-3">
                     
                         <ul class="timeline px-4">
                             
-                            <?php for ($i = 0; $i < sizeof($pubs); $i++){
+                            <?php if (sizeof($pubs) > 1){ for ($i = 0; $i < sizeof($pubs); $i++){
                                 //Not the best way, but need some kind of flag for the string to detect a different title
                                 if($pubs[$i] == "Peer-reviewed first-author publications" || $pubs[$i] == "Co-authored peer-reviewed publications"){
                                     echo "<h4 class=' py-1 '>".$pubs[$i]."</h4><br>";
@@ -188,7 +188,8 @@ if (!$conn) {
                                     echo "<br>";
                                 } else {
                                echo"<li class='mx-3 py-2 '>".$pubs[$i]."</li><br>";
-                            } }?>
+                            } } } else {echo "<h4 class='py-1'> No publications were found.</h4>";}
+                            ?>
                           
 
                         </ul><!-- end of timeline-->
@@ -201,7 +202,7 @@ if (!$conn) {
                          
                      echo "<p>".$mentor."</p>";
                     } else{
-                        echo "This staff does not have a mentorship history";}?>
+                        echo "<h4 class='py-1'>Mentorship history was not found</h4>";}?>
                     </div>
                     <div id="tab-4" role="tabpanel" class="tab-pane my-4 p-3">
                     <p> <?php 
@@ -210,7 +211,7 @@ if (!$conn) {
                          
                         echo "<p>".$projects."</p>";
                        } else{
-                           echo "This staff does not have any projects";}
+                           echo "<h4 class='py-1'>No projects were found</h4>";}
                     ?></p>
                     </div>
                     </div>
