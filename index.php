@@ -47,19 +47,21 @@ if (!$conn) {
       echo $conn->error;
     } else{
         ?>        
-        <div class="container-fluid justify-content-start   row col-sm-12 m-auto w-100  bg-white h-100">
-            <div class="p-5 m-auto control-panel col-sm-12">
-                <div class="filter-title">
+        <div class="container-fluid justify-content-start   row col-sm-12 m-auto  h-100">
+        <div class="p-5 m-auto col-sm-2"></div>
+
+            <div class="py-4 my-4 control-panel col-sm-8 bg-dark text-light">
+                <div class="filter-title text-center" >
                     <h4>Filter Control Panel</h4>
                 </div>
                 <div class="filter-controls col-sm-12 mx-3">
-                    <div class="filter-category row my-4">
-                        <div class="filter-title bg-dark text-light px-5 mb-2">
+                    <div class="filter-category row my-4 " >
+                        <div class="filter-title bg-light text-dark px-5 py-1 mb-2">
                             <h5>Position</h5>
                         </div>
-                            <div class="input-group row mx-3">
+                            <div class="input-group  mx-3 form-check-inline ">
                                 <div class="col-sm-12 row my-2">
-                                    <div class="filter-option mx-5 col-sm-2">
+                                    <div class="filter-option mx-4">
                                         <div class="row">
                                             <div class="input-group-checkbox mx-1">
                                                 <input type="checkbox" name="option-1" id="1">
@@ -67,7 +69,7 @@ if (!$conn) {
                                             <div class="input-group-append mx-1">Option 1</div>
                                         </div>
                                     </div>
-                                    <div class="filter-option mx-5 col-sm-2">
+                                    <div class="filter-option mx-4">
                                         <div class="row">
                                             <div class="input-group-checkbox mx-1">
                                                 <input type="checkbox" name="option-2" id="2">
@@ -75,7 +77,7 @@ if (!$conn) {
                                             <div class="input-group-append mx-1">Option 2</div>
                                         </div>
                                     </div>
-                                    <div class="filter-option mx-5 col-sm-2">
+                                    <div class="filter-option mx-4">
                                         <div class="row">
                                             <div class="input-group-checkbox mx-1">
                                                 <input type="checkbox" name="option-3" id="3">
@@ -83,7 +85,7 @@ if (!$conn) {
                                             <div class="input-group-append mx-1">Option 3</div>
                                         </div>
                                     </div>
-                                    <div class="filter-option mx-5 col-sm-2">
+                                    <div class="filter-option mx-4">
                                         <div class="row">
                                             <div class="input-group-checkbox mx-1">
                                                 <input type="checkbox" name="option-4" id="4">
@@ -95,12 +97,12 @@ if (!$conn) {
                             </div>
                     </div>
                     <div class="filter-category row my-4">
-                        <div class="filter-title bg-dark text-light px-5 mb-2">
+                        <div class="filter-title  bg-light text-dark px-3 py-1 mb-2">
                             <h5>Research Areas</h5>
                         </div>
-                            <div class="input-group row mx-3">
-                                <div class="col-sm-12 row my-2">
-                                    <div class="filter-option mx-5 col-sm-2">
+                            <div class="input-group row mx-3 form-check-inline">
+                            <div class="col-sm-12 row my-2">
+                                    <div class="filter-option mx-4">
                                         <div class="row">
                                             <div class="input-group-checkbox mx-1">
                                                 <input type="checkbox" name="option-1" id="1">
@@ -108,7 +110,7 @@ if (!$conn) {
                                             <div class="input-group-append mx-1">Option 1</div>
                                         </div>
                                     </div>
-                                    <div class="filter-option mx-5 col-sm-2">
+                                    <div class="filter-option mx-4">
                                         <div class="row">
                                             <div class="input-group-checkbox mx-1">
                                                 <input type="checkbox" name="option-2" id="2">
@@ -116,7 +118,7 @@ if (!$conn) {
                                             <div class="input-group-append mx-1">Option 2</div>
                                         </div>
                                     </div>
-                                    <div class="filter-option mx-5 col-sm-2">
+                                    <div class="filter-option mx-4">
                                         <div class="row">
                                             <div class="input-group-checkbox mx-1">
                                                 <input type="checkbox" name="option-3" id="3">
@@ -124,7 +126,7 @@ if (!$conn) {
                                             <div class="input-group-append mx-1">Option 3</div>
                                         </div>
                                     </div>
-                                    <div class="filter-option mx-5 col-sm-2">
+                                    <div class="filter-option mx-4">
                                         <div class="row">
                                             <div class="input-group-checkbox mx-1">
                                                 <input type="checkbox" name="option-4" id="4">
@@ -137,10 +139,12 @@ if (!$conn) {
                     </div>
                 </div>
             </div>
+            <div class="p-5 m-auto col-sm-2"></div>
         </div>
       
-        <div class="container-fluid results">
-            <!-- Browser keeps adding a closing div -->
+        <div class="container-fluid results ">
+            <!-- Browser keeps adding a closing div  below -->
+            <!-- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv -->
 
                 <?php 
         $count = -1; //create a counter  & first row. Set -1 to account for divde by zero error
@@ -158,7 +162,7 @@ if (!$conn) {
 
              if (($count +1) % 3 ==0){ //Prints the new row and a card for every four entries
                //Closes the previous row ?> </div>
-                <div class="row col-sm-12  mx-auto my-auto">
+                <div class="row col-sm-12  mx-auto my-auto justify-content-center">
                     <div class="card h-100 col-sm-3 my-2 px-0 mx-2 px-0 ">
                         <div class=" card-header py-0 px-0">
                                     <a href="./profile.php?id=<?php  echo $id; ?>"> <img class="img-fluid card-img-top"src="<?php echo $image; ?>" width="50%"></a>

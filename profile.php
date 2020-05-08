@@ -68,16 +68,25 @@ if (!$conn) {
 
     <section class="row col-sm-12 ">
             <div class="col-sm-1 mx-4"></div>
-            <div class=" col-sm-3 card h-100 my-2 px-0 ml-4 ">
+            <div class=" col-sm-3  my-2 px-0 ml-4 ">
+                <div class="card ">
 
-                <div class=" card-header py-0 px-0">
-                    <a href="./staff.php"><img class="img-fluid card-img-top"src="<?php echo $image ?>" width="50%"></a>
+                    <div class=" card-header py-0 px-0">
+                        <img class="img-fluid card-img-top"src="<?php echo $image ?>" width="50%">
+                    </div>
+
+                    </div>
+               
                 </div>
-                <div class="card-body bg-dark text-light">
-                    <p class="card-title m-0 p-0 text-center"> <?php echo $name; ?> </p>
-                </div>
-                <div class="card-footer bg-secondary  d-flex justify-content-center align-items-center text-light">
+                   
                 
+           
+            <div class="col-sm-4 p-0 mr-0 ml-5 my-3 justify-content-center">
+                <div class="staff-info">
+                   
+                <div class="p-3 mt-5 mb-3 text-center">
+                        <h1 class="upper"><?php echo $name; ?></h1>
+                    </div>
                     <ul style="list-style-type:none;"class="col-sm-12 mx-0 px-0">
                         <li class="text-sm-left mx-3 row">
                         <span><i class="fas fa-user mx-4"></i></span>     <?php echo $pos; ?>    
@@ -96,19 +105,13 @@ if (!$conn) {
                         </li> 
 
                     </ul>
-                </div>
-            </div>
-            <div class="col-sm-4 p-0 mr-0 ml-5 my-3 justify-content-center">
-                <div class="research-interests">
-                   
-                <div class="bg-dark text-light p-3 mt-5 mb-3 text-center">
-                        <h5 class="upper">Research Areas</h5>
-                    </div>
-                    <ul class="text-black bg-white p-2 m-0 list-group list-group flush">
+                     
+               
+                <ul class="  p-2 m-0 list-group list-group flush">
                     <?php 
                         for($i = 0; $i < sizeof($areas); $i++){
                             ?>
-                            <li class='text-center list-group-item'><?php echo $areas[$i]?></li>
+                            <li class='text-center bg-light  text-black list-group-item'><?php echo $areas[$i]?></li>
                             <?php
                         }
                     ?>
@@ -184,15 +187,22 @@ if (!$conn) {
                     
                         <ul class="timeline px-4">
                             
-                            <?php for ($i = 0; $i < sizeof($pubs); $i++){
-                                //Not the best way, but need some kind of flag for the string to detect a different title
-                                if($pubs[$i] == "Peer-reviewed first-author publications" || $pubs[$i] == "Co-authored peer-reviewed publications"){
-                                    echo "<h4 class=' py-1 '>".$pubs[$i]."</h4><br>";
-                                } elseif($pubs[$i] == ''){
-                                    echo "<br>";
-                                } else {
-                               echo"<li class='mx-3 py-2 '>".$pubs[$i]."</li><br>";
-                            } }?>
+                            <?php 
+                            if(sizeof($pubs) > 1){
+                                for ($i = 0; $i < sizeof($pubs); $i++){
+                                    //Not the best way, but need some kind of flag for the string to detect a different title
+                                    if($pubs[$i] == "Peer-reviewed first-author publications" || $pubs[$i] == "Co-authored peer-reviewed publications"){
+                                        echo "<h4 class=' py-1 '>".$pubs[$i]."</h4><br>";
+                                    } elseif($pubs[$i] == ''){
+                                        echo "<br>";
+                                    } else {
+                                echo"<li class='mx-3 py-2 '>".$pubs[$i]."</li><br>";
+                                    } 
+                                }
+                            }else{
+                                echo "No publications were found";
+                            }
+                                ?>
                           
 
                         </ul><!-- end of timeline-->
