@@ -23,7 +23,7 @@ session_start();
 * University of Central Florida
 *
 * @author     Yjang Wynter <yjang.wynter@ucf.edu> <yjangwynter@gmail.com>
-* @version    0.1
+* @version    0.1.1
 * 
 */
 ///////////////////////////////////////////////////////
@@ -46,12 +46,104 @@ if (!$conn) {
       echo "Error #". $conn->errno . " \n";
       echo $conn->error;
     } else{
-        //CREATE SESSION VARIABLE
+        ?>        
+        <div class="container-fluid justify-content-start   row col-sm-12 m-auto w-100  bg-white h-100">
+            <div class="p-5 m-auto control-panel col-sm-12">
+                <div class="filter-title">
+                    <h4>Filter Control Panel</h4>
+                </div>
+                <div class="filter-controls col-sm-12 mx-3">
+                    <div class="filter-category row my-4">
+                        <div class="filter-title bg-dark text-light px-5 mb-2">
+                            <h5>Position</h5>
+                        </div>
+                            <div class="input-group row mx-3">
+                                <div class="col-sm-12 row my-2">
+                                    <div class="filter-option mx-5 col-sm-2">
+                                        <div class="row">
+                                            <div class="input-group-checkbox mx-1">
+                                                <input type="checkbox" name="option-1" id="1">
+                                            </div>
+                                            <div class="input-group-append mx-1">Option 1</div>
+                                        </div>
+                                    </div>
+                                    <div class="filter-option mx-5 col-sm-2">
+                                        <div class="row">
+                                            <div class="input-group-checkbox mx-1">
+                                                <input type="checkbox" name="option-2" id="2">
+                                            </div>
+                                            <div class="input-group-append mx-1">Option 2</div>
+                                        </div>
+                                    </div>
+                                    <div class="filter-option mx-5 col-sm-2">
+                                        <div class="row">
+                                            <div class="input-group-checkbox mx-1">
+                                                <input type="checkbox" name="option-3" id="3">
+                                            </div>
+                                            <div class="input-group-append mx-1">Option 3</div>
+                                        </div>
+                                    </div>
+                                    <div class="filter-option mx-5 col-sm-2">
+                                        <div class="row">
+                                            <div class="input-group-checkbox mx-1">
+                                                <input type="checkbox" name="option-4" id="4">
+                                            </div>
+                                            <div class="input-group-append mx-1">Option 4</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="filter-category row my-4">
+                        <div class="filter-title bg-dark text-light px-5 mb-2">
+                            <h5>Research Areas</h5>
+                        </div>
+                            <div class="input-group row mx-3">
+                                <div class="col-sm-12 row my-2">
+                                    <div class="filter-option mx-5 col-sm-2">
+                                        <div class="row">
+                                            <div class="input-group-checkbox mx-1">
+                                                <input type="checkbox" name="option-1" id="1">
+                                            </div>
+                                            <div class="input-group-append mx-1">Option 1</div>
+                                        </div>
+                                    </div>
+                                    <div class="filter-option mx-5 col-sm-2">
+                                        <div class="row">
+                                            <div class="input-group-checkbox mx-1">
+                                                <input type="checkbox" name="option-2" id="2">
+                                            </div>
+                                            <div class="input-group-append mx-1">Option 2</div>
+                                        </div>
+                                    </div>
+                                    <div class="filter-option mx-5 col-sm-2">
+                                        <div class="row">
+                                            <div class="input-group-checkbox mx-1">
+                                                <input type="checkbox" name="option-3" id="3">
+                                            </div>
+                                            <div class="input-group-append mx-1">Option 3</div>
+                                        </div>
+                                    </div>
+                                    <div class="filter-option mx-5 col-sm-2">
+                                        <div class="row">
+                                            <div class="input-group-checkbox mx-1">
+                                                <input type="checkbox" name="option-4" id="4">
+                                            </div>
+                                            <div class="input-group-append mx-1">Option 4</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
       
+        <div class="container-fluid results">
+            <!-- Browser keeps adding a closing div -->
 
+                <?php 
         $count = -1; //create a counter  & first row. Set -1 to account for divde by zero error
-        ?>                <div class="row col-sm-12 mx-auto my-auto">
-        <?php
         while($row = $result->fetch_assoc()){
             //set variables
             $name = $row['FULL_NAME'];
@@ -63,16 +155,13 @@ if (!$conn) {
             $phone = $row['PHONE_EXT'];
             $link = $row['ORCID_LINK'];
 
+
              if (($count +1) % 3 ==0){ //Prints the new row and a card for every four entries
                //Closes the previous row ?> </div>
                 <div class="row col-sm-12  mx-auto my-auto">
                     <div class="card h-100 col-sm-3 my-2 px-0 mx-2 px-0 ">
                         <div class=" card-header py-0 px-0">
-                        <!-- Not sure how to implement this
-                        But the idea is click the image to get the name of the entry from the sibling node below.
-                         then set that name to a session variable to then use to query the information of the staff member and their
-                        information in the next page. -->
-                        <a href="./profile.php?id=<?php  echo $id; ?>"> <img class="img-fluid card-img-top"src="<?php echo $image; ?>" width="50%"></a>
+                                    <a href="./profile.php?id=<?php  echo $id; ?>"> <img class="img-fluid card-img-top"src="<?php echo $image; ?>" width="50%"></a>
                         </div>
                         <div  class="card-body bg-dark text-light">
                             <p class="card-title h-100 m-0 p-0 text-center"> <?php echo $name; ?> </p>
@@ -104,7 +193,8 @@ if (!$conn) {
             } else{  // prints the cards in the row 
                 //Prints the first row
                 //if the four or more entries exist, end the last row and create new row
-                ?><div class="card h-100 col-sm-3 my-2 px-0 mx-2 px-0 ">
+                            ?>
+                        <div class="card h-100 col-sm-3 my-2 px-0 mx-2 px-0 ">
 
                 <div class=" card-header py-0 px-0">
                 <a href="./profile.php?id=<?php  echo $id; ?>"> <img class="img-fluid card-img-top"src="<?php echo $image; ?>" width="50%"></a>
@@ -139,22 +229,23 @@ if (!$conn) {
             } 
             $count++; // counter adds to itself to loop through the next row
         }
+    
+                    ?>   
+        </div> 
+       <?php
     }
      
     $conn->close();
-   
 ?>
 
 
 
 
 
-     
-        
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
+<script src="./js/filter.js"></script>
 </body>
-
 </html>
