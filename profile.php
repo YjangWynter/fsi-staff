@@ -100,20 +100,7 @@ if (!$conn) {
             </div>
             <div class="col-sm-4 p-0 mr-0 ml-5 my-3 justify-content-center">
                 <div class="research-interests">
-
-
-                    <div class=" bg-dark text-light p-3 mx-4 mb-2 mt-5 text-center">
-                            <h5 class="upper">Biography</h5><?php //if statement for bio ?>
-                        </div>
-                        <?php 
-                            for ($i = 0; $i < sizeof($bio); $i++){
-                               echo"<p class=' my-4 py-4 px-4'>".$bio[$i]."</p>";
-                            }
-                        ?>
-                
-
                    
-
                 <div class="bg-dark text-light p-3 mt-5 mb-3 text-center">
                         <h5 class="upper">Research Areas</h5>
                     </div>
@@ -139,35 +126,52 @@ if (!$conn) {
             <section class="px-4 row col-sm-12">
                 <div class="col-sm-1"></div>
                 <div class="col-sm-10 p-3 m-2">
-                <ul role="tablist" class="nav nav-tabs list-group-flush">
-                    <li class="list-group-item border bg-dark text-light p-3 text-center col-sm-3"role="presentation"><a class="text-light" href="#tab-1" role="tab" data-toggle="tab">
+                <ul role="tablist" class="nav nav-tabs list-group-flush justify-content-center border-0">
+                    <li class="list-group-item border bg-dark text-light p-3 text-center col-sm-2"role="presentation"><a class="text-light" href="#tab-1" role="tab" data-toggle="tab">
                         <div class="icon-box-simple">
-                            <i class="icon-telescope"></i><span>Research Descriptions</span>
+                            <i class="icon-telescope"></i><span>Biography</span>
                         </div>
                         </a>
                     </li>
 
-                    <li class="list-group-item border bg-dark text-light p-3  text-center col-sm-3"role="presentation" class=""><a  class="text-light" href="#tab-2" role="tab" data-toggle="tab">
+                    <li class="list-group-item border bg-dark text-light p-3  text-center col-sm-2"role="presentation" class=""><a  class="text-light" href="#tab-2" role="tab" data-toggle="tab">
                             <div class="icon-box-simple">
-                                <i class="icon-telescope"></i><span>Publications</span>
+                                <i class="icon-telescope"></i><span>Research Descriptions</span>
                             </div>
                         </a>
                     </li>
-                    <li class="list-group-item border bg-dark text-light p-3  col-sm-3 text-center" role="presentation"><a  class="text-light" href="#tab-3" role="tab" data-toggle="tab">
+                    <li class="list-group-item border bg-dark text-light p-3  col-sm-2 text-center" role="presentation"><a  class="text-light" href="#tab-3" role="tab" data-toggle="tab">
                             <div class="icon-box-simple">
-                                <i class="icon-puzzle"></i><span>Mentoring</span>
+                                <i class="icon-puzzle"></i><span>Publications</span>
                             </div>
                         </a>
                     </li>
-                    <li class="list-group-item border bg-dark text-light p-3  col-sm-3 text-center" role="presentation"> <a  class="text-light" href="#tab-4" role="tab" data-toggle="tab">
+                    <li class="list-group-item border bg-dark text-light p-3  col-sm-2 text-center" role="presentation"> <a  class="text-light" href="#tab-4" role="tab" data-toggle="tab">
                             <div class="icon-box-simple">
-                                <i class="ti-files"></i><span>Projects</span>
+                                <i class="ti-files"></i><span>Mentoring</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="list-group-item border bg-dark text-light p-3 col-sm-2 text-center" role="presentation"><a href="#tab-5" role="tab" data-toggle="tab" class="text-light">
+                            <div class="icon-box-simple">
+                                <i class="ti-profile"></i><span>Projects</span>
                             </div>
                         </a>
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div id="tab-1" role="tabpanel" class="tab-pane active my-4 py-3">
+                <div id="tab-1" class="tab-pane active my-4 py-3"role="tabpanel">
+                <?php 
+                        if(isset($bio)){
+                            for ($i = 0; $i < sizeof($bio); $i++){
+                               echo"<p class=' my-4 py-4 px-4'>".$bio[$i]."</p>";
+                                }
+                            } else {
+                            echo "No biography was found for this staff member";
+                        }
+                        ?>
+                </div>
+                    <div id="tab-2" role="tabpanel" class="tab-pane my-4 py-3">
                     <?php //if statement for description ?>
                         <p class="px-4"><?php 
                         if(strlen($description)> 1){
@@ -176,7 +180,7 @@ if (!$conn) {
                                 echo "No research description available";}
                                 ?></p>
                     </div>
-                    <div id="tab-2" role="tabpanel" class="tab-pane my-4 p-3">
+                    <div id="tab-3" role="tabpanel" class="tab-pane my-4 p-3">
                     
                         <ul class="timeline px-4">
                             
@@ -195,7 +199,7 @@ if (!$conn) {
 
                         <!-- -->
                     </div>
-                    <div id="tab-3" role="tabpanel" class="tab-pane my-4 p-3">
+                    <div id="tab-4" role="tabpanel" class="tab-pane my-4 p-3">
                     <?php //if statement for mentors 
                      if(strlen($mentor) > 5){  
                          
@@ -203,7 +207,7 @@ if (!$conn) {
                     } else{
                         echo "This staff does not have a mentorship history";}?>
                     </div>
-                    <div id="tab-4" role="tabpanel" class="tab-pane my-4 p-3">
+                    <div id="tab-5" role="tabpanel" class="tab-pane my-4 p-3">
                     <p> <?php 
                     
                     if(strlen($projects) > 5){  

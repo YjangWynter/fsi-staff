@@ -72,7 +72,7 @@ if (!$conn) {
                         But the idea is click the image to get the name of the entry from the sibling node below.
                          then set that name to a session variable to then use to query the information of the staff member and their
                         information in the next page. -->
-                        <a href="./staff.php?id=<?php  echo $id; ?>"> <img class="img-fluid card-img-top"src="<?php echo $image; ?>" width="50%"></a>
+                        <a href="./profile.php?id=<?php  echo $id; ?>"> <img class="img-fluid card-img-top"src="<?php echo $image; ?>" width="50%"></a>
                         </div>
                         <div  class="card-body bg-dark text-light">
                             <p class="card-title h-100 m-0 p-0 text-center"> <?php echo $name; ?> </p>
@@ -107,7 +107,7 @@ if (!$conn) {
                 ?><div class="card h-100 col-sm-3 my-2 px-0 mx-2 px-0 ">
 
                 <div class=" card-header py-0 px-0">
-                <a href="./staff.php?id=<?php  echo $id; ?>"> <img class="img-fluid card-img-top"src="<?php echo $image; ?>" width="50%"></a>
+                <a href="./profile.php?id=<?php  echo $id; ?>"> <img class="img-fluid card-img-top"src="<?php echo $image; ?>" width="50%"></a>
                 </div>
                 <div class="card-body bg-dark text-light">
                     <p class="card-title m-0 p-0 text-center"> <?php echo $name; ?> </p>
