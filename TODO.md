@@ -18,37 +18,38 @@ script in jQuery from
 https://planets.ucf.edu/current-members/
  */
 	<script>
-	var sections = $('.sectionContent');
-	function updateContentVisibility(){
-    var checkedLong = $(".filter-controls.long :checkbox:checked");
-    if(checkedLong.length){
-      sections.hide();
-      checkedLong.each(function(){
-          $("." + $(this).val()).show();
+
+	var entries = $('.entry');//array of all elements of class: aka staff entries that include this class
+	function updateContentVisibilityAreas(){ //function updates vis for the areass of staff
+    var checkedAreas = $(".filter-controls.areas :checkbox:checked"); // array of all the classes checked from control panel
+    if(checkedAreas.length){
+      entries.hide();// hides all the entries
+      checkedAreas.each(function(){
+          $("." + $(this).val()).show(); //show only the entries that share the selected class
       });
     } else {
-      sections.show();
+      entries.show(); // otherwise re-display all entries
     }
 	}
 
-	function updateContentVisibilityShort(){
-    var checkedShort = $(".filter-controls.short :checkbox:checked");
-    if(checkedShort.length){
-      sections.hide();
-      checkedShort.each(function(){
+	function updateContentVisibilityTitle(){ //function updates display by title of staff
+    var checkedTitle = $(".filter-controls.title :checkbox:checked");
+    if(checkedTitle.length){
+      entries.hide();
+      checkedTitle.each(function(){
       	console.log(this);
           $("." + $(this).val()).show();
       });
     } else {
-       sections.show();
+       entries.show();
     }
 	}
 
 
-	$(".filter-controls.short :checkbox").click(updateContentVisibilityShort);
-	updateContentVisibilityShort();
-	$(".filter-controls.long :checkbox").click(updateContentVisibility);
-	updateContentVisibility();
+	$(".filter-controls.title :checkbox").click(updateContentVisibilityTitle);
+	updateContentVisibilityTitle();
+	$(".filter-controls.areas :checkbox").click(updateContentVisibilityAreas);
+	updateContentVisibilityAreas();
 
 	</script>
 
