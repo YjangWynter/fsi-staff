@@ -149,14 +149,6 @@ if (!$conn) {
                                             <div class="input-group-append mx-1">Atmosphere</div>
                                         </div>
                                     </div>
-                                    <div class="filter-option mx-4">
-                                        <div class="row">
-                                            <div class="input-group-checkbox mx-1">
-                                                <input type="checkbox" name="atmosphere" id="atmosphere">
-                                            </div>
-                                            <div class="input-group-append mx-1">Atmosphere</div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="col-sm-12 row my-2">
                                     <div class="filter-option mx-4">
@@ -192,8 +184,6 @@ if (!$conn) {
         </div>
       
         <div class="container-fluid justify-content-center  row col-sm-12 m-auto  h-100 results ">
-
-
                 <?php 
         $count = -1; //create a counter  & first row. Set -1 to account for divde by zero error
         while($row = $result->fetch_assoc()){
@@ -208,9 +198,10 @@ if (!$conn) {
             $categories = $row['CATEGORIES'];
             $link = $row['ORCID_LINK']; 
             
-            //names of the areas
+            //remove comma from the string in categories to place as a class in entries
+            $categories = explode(",",$categories);
+            $categories = implode(" ", $categories);
             
-
             //titles of staff
             $title;
             //define class of entry based on their title
@@ -231,15 +222,11 @@ if (!$conn) {
                     $title = " ";
                 }
             }
-
-
-
-
              // prints the cards in the row 
                 //Prints the first row
                 //if the four or more entries exist, end the last row and create new row
                             ?>
-            <div class="shadow-lg entry <?php echo $title; ?> card h-auto col-sm-3 my-2 px-0 mx-2">
+            <div class="shadow-lg entry <?php echo "".$title." ".$categories; ?> card h-auto col-sm-3 my-2 px-0 mx-2">
 
                
                 <a class="card-img-top" href="./profile.php?id=<?php  echo $id; ?>"> <img class="img-fluid card-img-top"src="<?php echo $image; ?>" width="50%"></a>

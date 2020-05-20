@@ -1,32 +1,60 @@
+/*
+Few kinks 
+The program doesn't store the variables that were selected in memory yet and operates as an OR gate currently,
+which means I must turn the program into one that acts as an AND gate and store the data selected into a muttable structure 
+to retain values
+
+*/
 var entries = $('.entry');//array of all elements of class: aka staff entries that include this class
-function updateContentVisibilityAreas(){ //function updates vis for the areass of staff
-var checkedAreas = $(".filter-category.areas :checkbox:checked");
-$(".filter-category.areas :checkbox:checked"); // array of all the classes checked from control panel
-if(checkedAreas.length){
-  entries.hide();// hides all the entries
-  checkedAreas.each(function(){
-    var area = $(this).attr('id'); //show only the entries that share the selected class
-    $("." + area).show();
-  });
-} else {
-  entries.show(); // otherwise re-display all entries
+
+
+
+function getAreas(){ //function updates vis for the areass of staff
+  let checkedAreas = $(".filter-category.areas :checkbox:checked"); // array of all the classes checked from control panel
+  let selected = [];
+  if(checkedAreas.length){
+    checkedAreas.each(function(){
+        selected.push("." + $(this).attr('id'));
+
+    });
+  } 
+  console.log(selected);
+  return selected;
 }
+function getTitles(){ //function updates display by title of staff
+  let checkedTitle = $(".filter-category.position :checkbox:checked ");
+  let selected = [];
+  if(checkedTitle.length){
+    checkedTitle.each(function(){
+        selected.push("." + $(this).attr('id'));
+
+    });
+
+  } 
+  console.log(selected);
+  return selected;
 }
-function updateContentVisibilityTitle(){ //function updates display by title of staff
-var checkedTitle = $(".filter-category.position :checkbox:checked");
-if(checkedTitle.length){
+function updateContentVisbility(){
+  let classes = [];
   entries.hide();
-  checkedTitle.each(function(){
-    var title = $(this).attr('id');
-      $("." + title).show();
-  });
-} else {
-   entries.show();
-}
+  classes.push(getTitles(), getAreas());
+  console.log(classes);
+  
+  let query = classes.join("");
+  if (query.length){
+
+
+  query = query.replace(",", "");
+  
+  $(""+ query+ "").show();
+  console.log( $(''+ query+'').show());
+  console.log(query);
+  } else{
+    entries.show();
+  }
 }
 
 
-$(".filter-category.position :checkbox").click(updateContentVisibilityTitle);
-updateContentVisibilityTitle();
-$(".filter-category.areas :checkbox").click(updateContentVisibilityAreas);
-updateContentVisibilityAreas();
+$(".filter-category :checkbox").click(updateContentVisbility);
+
+
