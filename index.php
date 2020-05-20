@@ -208,6 +208,10 @@ if (!$conn) {
             $categories = $row['CATEGORIES'];
             $link = $row['ORCID_LINK']; 
             
+            //names of the areas
+            
+
+            //titles of staff
             $title;
             //define class of entry based on their title
             $postDoc = "postdoctoral";

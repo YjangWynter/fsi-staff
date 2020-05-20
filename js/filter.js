@@ -5,7 +5,8 @@ $(".filter-category.areas :checkbox:checked"); // array of all the classes check
 if(checkedAreas.length){
   entries.hide();// hides all the entries
   checkedAreas.each(function(){
-      $("." + $(this).val()).show(); //show only the entries that share the selected class
+    var area = $(this).attr('id'); //show only the entries that share the selected class
+    $("." + area).show();
   });
 } else {
   entries.show(); // otherwise re-display all entries
@@ -16,8 +17,8 @@ var checkedTitle = $(".filter-category.position :checkbox:checked");
 if(checkedTitle.length){
   entries.hide();
   checkedTitle.each(function(){
-      console.log(this);
-      $("." + $(this).val()).show();
+    var title = $(this).attr('id');
+      $("." + title).show();
   });
 } else {
    entries.show();
