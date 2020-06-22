@@ -5,56 +5,87 @@ which means I must turn the program into one that acts as an AND gate and store 
 to retain values
 
 */
-var entries = $('.entry');//array of all elements of class: aka staff entries that include this class
+//array of all elements of class: aka staff entries that include this class
+var entries = $('.entry');
 
+ //function updates vis for the areass of staff
+function getAreas(){
 
+  let checkedAreas = $(".filter-category.areas :checkbox:checked");
 
-function getAreas(){ //function updates vis for the areass of staff
-  let checkedAreas = $(".filter-category.areas :checkbox:checked"); // array of all the classes checked from control panel
+ // array of all the classes checked from control panel
   let selected = [];
-  if(checkedAreas.length){
+
+  if(checkedAreas.length > 0){
+
     checkedAreas.each(function(){
+
         selected.push("." + $(this).attr('id'));
 
     });
-  } 
+
+  }
   console.log(selected);
+
   return selected;
+
 }
-function getTitles(){ //function updates display by title of staff
+  
+//function updates display by title of staff
+function getTitles(){ 
+
   let checkedTitle = $(".filter-category.position :checkbox:checked ");
+
   let selected = [];
-  if(checkedTitle.length){
+
+  if(checkedTitle.length > 0){
+
     checkedTitle.each(function(){
+
         selected.push("." + $(this).attr('id'));
 
     });
-
   } 
   console.log(selected);
+
   return selected;
+
 }
 function updateContentVisbility(){
   let classes = [];
+
   entries.hide();
+
   classes.push(getTitles(), getAreas());
+
   console.log(classes);
-  
+
+  //turn array to string
   let query = classes.join("");
-  if (query.length){
+
+  console.log("This is the pre-formated query: "+ query);
 
 
-  query = query.replace(",", "");
+
+  if (query.length > 0){
+
+  //removes all commas from string using regex
+  query = query.replace(/,/g, "");
+
   
   $(""+ query+ "").show();
-  console.log( $(''+ query+'').show());
-  console.log(query);
+
+  console.log( $(''+query+'').show());
+
+  console.log("This is the post-formated query: "+ query);
+
   } else{
     entries.show();
+
   }
 }
 
-
 $(".filter-category :checkbox").click(updateContentVisbility);
+
 
 
