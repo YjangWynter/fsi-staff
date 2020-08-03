@@ -31,14 +31,14 @@ $servername = "localhost"; // DB Server Host
 $username  = "root"; //DB User
 $password  = ""; // DB Password
 $database  =  "fsi"; //Database name
-$table = "science_staff";
+$table = "science_staff_3";
 $conn = new mysqli($servername, $username, $password,$database); // SQL Database Connector
 //PDO
 if (!$conn) {
     die('No pudo conectarse: ' . $conn->error($e)); // Failed to Connect
     }
     //this selects Anna's information
-    $sql = "SELECT ID, FULL_NAME, POSITION, IMAGE, DEPARTMENT, PRIMARY_MAIL, PHONE_EXT, BIOGRAPHY, RESEARCH_AREAS, RESEARCH_DESCRIPTION, PROJECTS, MENTORING, PUBLICATIONS, ORCID_LINK FROM $table WHERE ID =".$_GET['id'];
+    $sql = "SELECT ID, FULL_NAME, POSITION, IMAGE, DEPARTMENT, PRIMARY_EMAIL, PHONE_EXT, BIOGRAPHY, RESEARCH_AREAS, RESEARCH_DESCRIPTION, PROJECTS, MENTORING, PUBLICATIONS, ORCID_LINK FROM $table WHERE ID =".$_GET['id'];
     $result =  $conn->query($sql);
     if(!$result > 0){
       echo "Error #". $conn->errno . " \n";
@@ -49,7 +49,7 @@ if (!$conn) {
         $image = $row['IMAGE'];
         $pos = $row['POSITION'];
         $dept = $row['DEPARTMENT'];
-        $mail = $row['PRIMARY_MAIL'];
+        $mail = $row['PRIMARY_EMAIL'];
         $phone = $row['PHONE_EXT'];
         $link = $row['ORCID_LINK'];
 
@@ -88,21 +88,25 @@ if (!$conn) {
                     </div>
                     <ul style="list-style-type:none;"class="col-sm-12 mx-0 px-0">
                         <li class="text-sm-left mx-3 row">
-                        <span><i class="fas fa-user mx-4"></i></span>     <?php echo $pos; ?>    
+                        <span><i class="fas fa-user mx-4"></i></span>     <?php echo  nl2br($pos); ?>    
                         </li>
                         <li class="text-sm-left mx-3 row">
                         <span><i class="fas fa-building mx-4"></i></span>     <?php echo $dept; ?>
                         </li>
                         <li class="text-sm-left mx-3 row">
                         <span><i class="fas fa-envelope mx-4"></i></span>    <?php echo $mail; ?>
-                        </li>
-                        <li class="text-sm-left mx-3 row">
-                        <span><i class="fas fa-phone-alt mx-4"></i></span>Ext:    <?php echo $phone; ?>
-                        </li>
-                        <li class="text-sm-left mx-3 row">
-                            <span><a class="text-light" href=" <?php if (strlen($link) >0){ echo $link; }else {echo '#';} ?>"> <i class="fas fa fa-link mx-4"></i></a></span>    <a class="text-light"href=" <?php if (strlen($link) >0){echo $link; }else {echo '#';}?>"><?php  if (strlen($link) >0){ echo "Link";}else{ echo "N/A";}?></a>
                         </li> 
-
+                        <?php 
+                        if (isset($phone)){ ?>
+                            <li class="text-sm-left mx-3 row">
+                                <span><i class="fas fa-phone-alt mx-4"></i></span>Ext:   <?php echo $phone; ?>
+                            </li>
+                        <?php } 
+                        if (isset($link)){ ?>
+                            <li class="text-sm-left mx-3 row text-dark">
+                                <span><a class="text-dark "  href=" <?php  echo $link; ?>"> <i class="fas fa fa-globe mx-4 text-dark"></i></a></span>    <a class="text-dark" href=" <?php echo $link;?>"><?php echo "Web";?></a>
+                            </li> 
+                        <?php } ?> 
                     </ul>
                      
                
@@ -167,7 +171,7 @@ if (!$conn) {
                         <?php 
                                 if(isset($bio)){
                                     for ($i = 0; $i < sizeof($bio); $i++){
-                                    echo"<p class=' my-4 py-4 px-4'>".$bio[$i]."</p>";
+                                    echo"<p class=' my-4 py-4 px-4'>".nl2br($bio[$i])."</p>";
                                         }
                                     } else {
                                     echo "No biography was found for this staff member";
@@ -178,7 +182,7 @@ if (!$conn) {
                         <?php //if statement for description ?>
                             <p class="px-4"><?php 
                             if(strlen($description)> 1){
-                                echo $description;
+                                echo nl2br($description);
                             }else{
                                     echo "No research description available";}
                                     ?></p>
@@ -191,15 +195,11 @@ if (!$conn) {
                                 if(sizeof($pubs) > 1){
                                     for ($i = 0; $i < sizeof($pubs); $i++){
                                         //Not the best way, but need some kind of flag for the string to detect a different title
-                                        if($pubs[$i] == "Peer-reviewed first-author publications" || $pubs[$i] == "Co-authored peer-reviewed publications"){
-                                            echo "<h4 class=' py-1 '>".$pubs[$i]."</h4><br>";
-                                        } elseif($pubs[$i] == ''){
-                                            echo "<br>";
-                                        } else {
-                                    echo"<li class='mx-3 py-2 '>".$pubs[$i]."</li><br>";
+                                        
+                                    echo"<p class='mx-3 unstyled'>".nl2br($pubs[$i])."</p>";
                                         } 
                                     }
-                                }else{
+                                else{
                                     echo "No publications were found";
                                 }
                                     ?>
@@ -213,7 +213,7 @@ if (!$conn) {
                         <?php //if statement for mentors 
                         if(strlen($mentor) > 5){  
                             
-                        echo "<p>".$mentor."</p>";
+                        echo "<p>".nl2br($mentor)."</p>";
                         } else{
                             echo "This staff does not have a mentorship history";}?>
                         </div>
@@ -222,7 +222,7 @@ if (!$conn) {
                         
                         if(strlen($projects) > 5){  
                             
-                            echo "<p>".$projects."</p>";
+                            echo "<p>".nl2br($projects)."</p>";
                         } else{
                             echo "This staff does not have any projects";}
                         ?></p>

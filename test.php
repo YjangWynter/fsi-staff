@@ -30,7 +30,7 @@ session_start();
 * University of Central Florida
 *
 * @author     Yjang Wynter <yjang.wynter@ucf.edu> <yjangwynter@gmail.com>
-* @version    0.1.2
+* @version    0.1.1
 * 
 */
 ///////////////////////////////////////////////////////
@@ -39,7 +39,7 @@ $servername = "localhost"; // DB Server Host
 $username  = "root"; //DB User
 $password  = ""; // DB Password
 $database  =  "fsi"; //Database name
-$table = "science_staff_3";
+$table = "science_staff";
 $conn = new mysqli($servername, $username, $password,$database); // SQL Database Connector
 //PDO
 if (!$conn) {
@@ -233,7 +233,7 @@ if (!$conn) {
                 
 
                 <div class="card-header h-auto bg-dark text-light">
-                <a class="text-light"  href="./profile.php?id=<?php  echo $id; ?>"> <p class="card-title m-0 p-0 text-center"> <?php echo $name; ?> </p></a>
+                    <p class="card-title m-0 p-0 text-center"> <?php echo $name; ?> </p>
                 </div>
                 <div class="card-body bg-secondary px-0  d-flex justify-content-center align-items-center text-light">
                 
@@ -242,7 +242,7 @@ if (!$conn) {
                         <span><i class="fas fa-user mx-4"></i></span>     <?php echo  nl2br($pos);; //the position of the staff?>    
                         </li>
                         <li class="text-sm-left mx-3 row">
-                        <span><i class="fas fa-building mx-4"></i></span>     <?php echo  nl2br($dept);//the department of the staff ?>
+                        <span><i class="fas fa-building mx-4"></i></span>     <?php echo $dept;//the department of the staff ?>
                         </li>
                         <li class="text-sm-left mx-3 row ">
                         <span><i class="fas fa-envelope mx-4"></i></span>    <?php echo "<a class='text-light d-flex ' href='mailto:".$mail."'>".$mail."</a>"; // the email link of the staff?>
@@ -280,9 +280,14 @@ if (!$conn) {
 
 
     </div>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
 <script src="./js/filter.js"></script>
+
+
+
+
+</script>
 </body>
 </html>
